@@ -15,7 +15,8 @@ mongoose.connect(config.mongoDbUri, {
     if (err) {
         throw err;
     }
-    log.info("MongoDB connected successfully!")
+    log.info("MongoDB connected successfully!");
+
 });
 
 

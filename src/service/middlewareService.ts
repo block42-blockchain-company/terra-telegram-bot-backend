@@ -5,10 +5,6 @@ import express from 'express';
 import {AddressIncorrectForm, AuthNotDelegated} from "../const/errors";
 import "express-async-errors";
 
-export function loggingMiddleware(req: express.Request, res: express.Response, next) {
-    log.info(`${req.method} ${req.path}`)
-    next();
-}
 
 export function onlyLoggedInFromTelegram(req: express.Request, res: express.Response, next) {
     log.info("Checking Telegram authentication")
@@ -21,7 +17,6 @@ export function onlyLoggedInFromTelegram(req: express.Request, res: express.Resp
 
 
 function telegramAuthorized(query) {
-
     // In 'localterra' we skip authorization for easier testing
     if (config.network == "localterra") {
         return true

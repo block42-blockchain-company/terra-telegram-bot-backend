@@ -2,12 +2,12 @@ import express from 'express';
 import cookieParser from 'cookie-parser'
 import {delegationRouter} from "./router/delegationRouter";
 import bodyParser from "body-parser";
-import {errorHandler, loggingMiddleware} from "./service/middlewareService";
+import {errorHandler} from "./service/middlewareService";
 import {config} from "./const/config";
-
+import morgan from 'morgan'
 
 const app = express();
-app.use(loggingMiddleware);
+app.use(morgan('common'))
 app.use(bodyParser.json());
 app.use(`/${config.network}/msgauth`, delegationRouter);
 app.use(express.json());
