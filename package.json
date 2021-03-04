@@ -4,7 +4,7 @@
   "private": true,
   "main": "dist/app.js",
   "scripts": {
-    "start": "tsc && node dist/app.js"
+    "start:prod": "tsc && NODE_ENV=production node dist/app.js"
   },
   "dependencies": {
     "@terra-money/terra.js": "^1.5.0",
