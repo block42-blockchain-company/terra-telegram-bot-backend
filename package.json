@@ -8,11 +8,18 @@
   },
   "dependencies": {
     "@terra-money/terra.js": "^1.5.0",
+    "@types/mongodb": "^3.6.8",
+    "@types/mongoose": "^5.10.3",
+    "async-express-decorator": "^1.1.0",
+    "axios": "^0.21.1",
     "body-parser": "^1.18.3",
     "cookie-parser": "~1.4.4",
     "crypto": "^1.0.1",
     "debug": "~2.6.9",
     "express": "~4.16.1",
+    "express-async-errors": "^3.1.1",
+    "mongodb": "^3.6.4",
+    "mongoose": "^5.11.18",
     "morgan": "~1.9.1",
     "tslog": "^3.1.1"
   },

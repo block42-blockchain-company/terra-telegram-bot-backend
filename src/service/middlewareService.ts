@@ -2,13 +2,16 @@ import crypto from "crypto";
 import {config} from "../const/config";
 import {log} from "../const/logger";
 import express from 'express';
+import {AddressIncorrectForm, AuthNotDelegated} from "../const/errors";
+import "express-async-errors";
 
 export function loggingMiddleware(req: express.Request, res: express.Response, next) {
     log.info(`${req.method} ${req.path}`)
     next();
 }
 
-export function telegramAuthenticationMiddleware(req: express.Request, res: express.Response, next) {
+export function onlyLoggedInFromTelegram(req: express.Request, res: express.Response, next) {
+    log.info("Checking Telegram authentication")
     if (telegramAuthorized(req.query)) {
         next();
     } else {
@@ -18,6 +21,12 @@ export function telegramAuthenticationMiddleware(req: express.Request, res: expr
 
 
 function telegramAuthorized(query) {
+
+    // In 'localterra' we skip authorization for easier testing
+    if (config.network == "localterra") {
+        return true
+    }
+
     let hash = query['hash']
     delete query['hash']
 
@@ -35,4 +44,15 @@ function telegramAuthorized(query) {
         .digest('hex');
 
     return hmac === hash;
+}
+
+export function errorHandler(err, req, res, next) {
+    if (err instanceof AuthNotDelegated) {
+        return res.status(405).send({error: "Auth is not delegated! Use /generate/{address} and broadcast it first!"})
+    } else if (err instanceof AddressIncorrectForm) {
+        return res.status(405).send({error: "Provided address has incorrect form!"})
+    }
+
+    log.error(err)
+    next(res);
 }
