@@ -35,8 +35,18 @@ export async function hasUserDelegated(userId: string) {
     return result != null;
 }
 
+
+export async function getUser(userId: string) {
+    return await VoteDelegation.findOne({telegramId: userId}, {__v: 0, _id: 0}).exec();
+}
+
 export async function getWalletAddress(userId: string) {
-    const user = await VoteDelegation.findOne({telegramId: userId}).exec();
+    const user = await getUser(userId);
+
     return user['walletAddress'];
 }
 
+export async function closeDbConnection() {
+    log.info("Disconnecting db...")
+    await mongoose.disconnect()
+}

@@ -1,7 +1,7 @@
 import express from "express";
 import {broadcastVote, generateMsgGrantAuthorization, handleDelegationConfirm} from "../service/delegationService";
 import {onlyLoggedInFromTelegram} from "../service/middlewareService";
-import {getWalletAddress, hasUserDelegated} from "../db/dbService";
+import {getUser, getWalletAddress, hasUserDelegated} from "../db/dbService";
 import {MsgVote} from "@terra-money/terra.js";
 
 
@@ -24,6 +24,14 @@ delegationRouter.get('/has-delegated/:userId', async (req, res) => {
 
     res.send({result: hasDelegated})
 })
+
+
+delegationRouter.get('/user/:userId', async (req, res) => {
+    let user = await getUser(req.params['userId'])
+
+    res.send({result: user})
+})
+
 
 delegationRouter.post('/vote/:userId', async (req, res) => {
     const userId = req.params['userId'];

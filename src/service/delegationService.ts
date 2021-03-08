@@ -19,15 +19,15 @@ import "express-async-errors";
 
 const client = new LCDClient({
     URL: config.lcdUrl,
-    chainID: config.chainID,
-    gasPrices: config.gasPrices,
+    chainID: config.chainID
 });
 
 let wallet: Wallet;
 
 fs.readFile(config.mnemonicPath, (err, data) => {
     if (err) {
-        throw Error("No mnemonic provided!")
+        const msg = `No mnemonic provided under ${config.mnemonicPath}`;
+        throw Error(msg);
     }
     wallet = client.wallet(new MnemonicKey({mnemonic: data.toString()}));
     log.info("Wallet loaded successfully!")
@@ -60,6 +60,7 @@ export async function handleDelegationConfirm(req: express.Request) {
 
 async function hasGrantedPermission(address: string): Promise<boolean> {
     let url = config.lcdUrl + `msgauth/granters/${address}/grantees/${wallet.key.accAddress}/grants`
+    //todo: add /vote in the end and change handling!
     let response;
     try {
         response = await axios.get(url);
@@ -94,6 +95,8 @@ export async function broadcastVote(vote: MsgVote) {
             vote,
         ]),
     ];
+
+    console.log(client);
 
     const tx = await wallet.createAndSignTx({msgs});
 

@@ -28,18 +28,14 @@ const mnemonicPaths = {
     'mainnet': path.join(configFolder, 'mnemonic_prod.txt'),
 }
 
-config.network = process.env.network in availableNetworks ? process.env.network : 'localterra'
-log.info(`Running on ${config.network}`)
+config.network = availableNetworks.includes(process.env.network) ? process.env.network : 'localterra'
 config.port = 3000
 config.telegramBotToken = '1284332659:AAFn-yeQJ6xlUzzwCcXGU9dz_a3HK_86a-w';
 config.lcdUrl = lcdUrls[config.network]
 config.chainID = chainIds[config.network]
-config.mnemonicPath = process.env.network ?? mnemonicPaths[config.network];
+config.mnemonicPath = mnemonicPaths[config.network];
 
-config.gasPrices = "0.15uluna,0.15uusd,0.1018usdr,178.05ukrw,431.6259umnt";
 config.authorizationPeriod = new Int(86400 * 365 * 100 * 1000000000) // 100 years
-config.mongoDbPassword = '7Rknqg6SFXUuCVjI'
-config.mongoDbName = 'terra-telegram-bot-backend'
-config.mongoDbUri = `mongodb+srv://admin:${config.mongoDbPassword}@terra-telegram-bot.30t8v.mongodb.net/${config.mongoDbName}?retryWrites=true&w=majority`
+config.mongoDbUri = `mongodb+srv://admin:7Rknqg6SFXUuCVjI@terra-telegram-bot.30t8v.mongodb.net/${config.network}-terra-backend?retryWrites=true&w=majority`
 
 

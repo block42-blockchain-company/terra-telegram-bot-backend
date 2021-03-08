@@ -43,7 +43,7 @@ function telegramAuthorized(query) {
 
 export function errorHandler(err, req, res, next) {
     if (err instanceof AuthNotDelegated) {
-        return res.status(405).send({error: "Auth is not delegated! Use /generate/{address} and broadcast it first!"})
+        return res.status(403).send({error: "Auth is not delegated! Use /generate/{address} and broadcast it first!"})
     } else if (err instanceof AddressIncorrectForm) {
         return res.status(405).send({error: "Provided address has incorrect form!"})
     }
