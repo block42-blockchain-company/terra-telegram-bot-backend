@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(errorHandler)
-app.use(helmet)
+app.use(helmet())
 app.listen(config.port);
 
 
