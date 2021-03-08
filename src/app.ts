@@ -6,6 +6,8 @@ import {errorHandler} from "./service/middlewareService";
 import {config} from "./const/config";
 import morgan from 'morgan'
 
+const helmet = require('helmet');
+
 const app = express();
 app.use(morgan('common'))
 app.use(bodyParser.json());
@@ -14,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(errorHandler)
-
+app.use(helmet)
 app.listen(config.port);
 
 

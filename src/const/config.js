@@ -1,11 +1,19 @@
 import {Int} from "@terra-money/terra.js";
 import * as path from "path";
+import {log} from "../../dist/const/logger";
 
 export let config = {};
 
-config.network = 'localterra';
-// const network = 'testnet';
-// const network = 'mainnet';
+
+const availableNetworks = ['localterra', 'testnet', 'mainnet'];
+
+if (process.env.network in availableNetworks) {
+    config.network = process.env.network;
+} else {
+    config.network = 'localterra';
+}
+
+log.info(`Running on ${config.network}`)
 
 const lcdUrls = {
     'localterra': 'http://localhost:1317/',
