@@ -1,0 +1,9 @@
+{
+  "apps": [
+    {
+      "name": "testnet-terra-telegram-bot-backend",
+      "script": "npm",
+      "args": "start testnet"
+    }
+  ]
+}

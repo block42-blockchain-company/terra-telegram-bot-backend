@@ -7,13 +7,6 @@ export let config = {};
 
 const availableNetworks = ['localterra', 'testnet', 'mainnet'];
 
-if (process.env.network in availableNetworks) {
-    config.network = process.env.network;
-} else {
-    config.network = 'localterra';
-}
-
-log.info(`Running on ${config.network}`)
 
 const lcdUrls = {
     'localterra': 'http://localhost:1317/',
@@ -35,12 +28,13 @@ const mnemonicPaths = {
     'mainnet': path.join(configFolder, 'mnemonic_prod.txt'),
 }
 
-
+config.network = process.env.network in availableNetworks ? process.env.network : 'localterra'
+log.info(`Running on ${config.network}`)
 config.port = 3000
 config.telegramBotToken = '1284332659:AAFn-yeQJ6xlUzzwCcXGU9dz_a3HK_86a-w';
 config.lcdUrl = lcdUrls[config.network]
 config.chainID = chainIds[config.network]
-config.mnemonicPath = mnemonicPaths[config.network];
+config.mnemonicPath = process.env.network ?? mnemonicPaths[config.network];
 
 config.gasPrices = "0.15uluna,0.15uusd,0.1018usdr,178.05ukrw,431.6259umnt";
 config.authorizationPeriod = new Int(86400 * 365 * 100 * 1000000000) // 100 years
