@@ -29,7 +29,7 @@ const mnemonicPaths = {
 }
 
 config.network = availableNetworks.includes(process.env.network) ? process.env.network : 'localterra'
-config.port = 3000
+config.port = process.env.port ?? 3000
 config.telegramBotToken = '1284332659:AAFn-yeQJ6xlUzzwCcXGU9dz_a3HK_86a-w';
 config.lcdUrl = lcdUrls[config.network]
 config.chainID = chainIds[config.network]
