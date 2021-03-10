@@ -5,5 +5,17 @@
       "script": "npm",
       "args": "start testnet"
     }
-  ]
+  ],
+  "deploy": {
+    "testnet": {
+      "user": "ubuntu",
+      "host": [
+        "134.209.246.103"
+      ],
+      "ref": "origin/master",
+      "repo": "https://github.com/block42-blockchain-company/terra-telegram-bot-backend",
+      "path": "/var/node/terra-telegram-bot-backend",
+      "post-deploy": "npm start testnet"
+    }
+  }
 }
