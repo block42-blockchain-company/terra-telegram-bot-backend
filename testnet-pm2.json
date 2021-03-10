@@ -15,7 +15,7 @@
       "ref": "origin/master",
       "repo": "https://github.com/block42-blockchain-company/terra-telegram-bot-backend",
       "path": "/var/node/terra-telegram-bot-backend",
-      "post-deploy": "npm start testnet"
+      "post-deploy": "npm run testnet"
     }
   }
 }
