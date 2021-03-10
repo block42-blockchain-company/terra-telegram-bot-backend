@@ -4,7 +4,7 @@
   "private": true,
   "main": "dist/app.js",
   "scripts": {
-    "testnet": "tsc && NODE_ENV=production network=testnet port=8080 node dist/app.js"
+    "testnet:prod": "tsc && NODE_ENV=production network=testnet port=8080 node dist/app.js"
   },
   "dependencies": {
     "@terra-money/terra.js": "^1.5.0",
