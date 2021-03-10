@@ -18,6 +18,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(errorHandler)
 app.use(helmet())
+app.get('*', notFoundHandler);
 app.listen(config.port);
 
 log.info(`Starting on ${config.network} and port ${config.port}`)
@@ -28,4 +29,8 @@ process.on('beforeExit', cleanup);
 async function cleanup() {
     await closeDbConnection()
     process.exit(0)
+}
+
+function notFoundHandler(req, res) {
+    res.status(404).send({result: "Nothing to be done here"});
 }
