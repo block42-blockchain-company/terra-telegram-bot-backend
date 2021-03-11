@@ -19,13 +19,6 @@ delegationRouter.post('/confirm/:address', onlyLoggedInFromTelegram, async (req,
     return res.status(200).send({result: {saved: result}})
 })
 
-delegationRouter.get('/has-delegated/:userId', async (req, res) => {
-    let hasDelegated = await hasUserDelegated(req.params['userId'])
-
-    res.send({result: hasDelegated})
-})
-
-
 delegationRouter.get('/user/:userId', async (req, res) => {
     let user = await getUser(req.params['userId'])
 
