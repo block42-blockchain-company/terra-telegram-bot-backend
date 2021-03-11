@@ -1,4 +1,3 @@
-require('dotenv').config()
 import express from 'express';
 import cookieParser from 'cookie-parser'
 import {delegationRouter} from "./router/delegationRouter";
@@ -6,9 +5,9 @@ import bodyParser from "body-parser";
 import {errorHandler} from "./service/middlewareService";
 import {config} from "./const/config";
 import morgan from 'morgan'
-import {log} from "../dist/const/logger";
 import helmet from 'helmet';
 import {closeDbConnection} from "./db/dbService";
+import {log} from './const/logger';
 
 const app = express();
 app.use(morgan('common'))

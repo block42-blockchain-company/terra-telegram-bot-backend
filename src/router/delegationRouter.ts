@@ -1,7 +1,7 @@
 import express from "express";
 import {broadcastVote, generateMsgGrantAuthorization, handleDelegationConfirm} from "../service/delegationService";
 import {onlyLoggedInFromTelegram} from "../service/middlewareService";
-import {getUser, getWalletAddress, hasUserDelegated} from "../db/dbService";
+import {getUser, getWalletAddress} from "../db/dbService";
 import {MsgVote} from "@terra-money/terra.js";
 
 
