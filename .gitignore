@@ -220,3 +220,7 @@ dist
 .vscode-test
 
 # End of https://www.toptal.com/developers/gitignore/api/node
+
+
+# CONFIG - these files must remain ignored so PM2 doesn't reset it's state on deployment
+config/
