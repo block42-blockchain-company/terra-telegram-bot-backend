@@ -1,3 +1,4 @@
+require('dotenv').config()
 import express from 'express';
 import cookieParser from 'cookie-parser'
 import {delegationRouter} from "./router/delegationRouter";

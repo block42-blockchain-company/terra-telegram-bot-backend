@@ -6,7 +6,6 @@ import {
     MsgGrantAuthorization,
     MsgVote
 } from "@terra-money/terra.js";
-import * as fs from "fs";
 import {Wallet} from "@terra-money/terra.js/dist/client/lcd/Wallet";
 import {log} from "../const/logger";
 import {config} from "../const/config";
@@ -22,17 +21,9 @@ const client = new LCDClient({
     chainID: config.chainID
 });
 
-let wallet: Wallet;
 
-fs.readFile(config.mnemonicPath, (err, data) => {
-    if (err) {
-        const msg = `No mnemonic provided under ${config.mnemonicPath}`;
-        throw Error(msg);
-    }
-    wallet = client.wallet(new MnemonicKey({mnemonic: data.toString()}));
-    log.info("Wallet loaded successfully!")
-})
-
+const wallet: Wallet = client.wallet(new MnemonicKey({mnemonic: config.mnemonic}));
+log.info("Wallet loaded successfully!")
 
 export function generateMsgGrantAuthorization(address: string): MsgGrantAuthorization {
     return new MsgGrantAuthorization(
