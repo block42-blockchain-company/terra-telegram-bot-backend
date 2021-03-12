@@ -43,7 +43,7 @@ export async function getUser(userId: string) {
 export async function getWalletAddress(userId: string) {
     const user = await getUser(userId);
 
-    return user['walletAddress'];
+    return user ? user['walletAddress'] : null;
 }
 
 export async function closeDbConnection() {

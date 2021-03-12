@@ -87,8 +87,6 @@ export async function broadcastVote(vote: MsgVote) {
         ]),
     ];
 
-    console.log(client);
-
     const tx = await wallet.createAndSignTx({msgs});
 
     return await client.tx.broadcast(tx);

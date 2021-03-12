@@ -31,6 +31,10 @@ delegationRouter.post('/vote/:userId', async (req, res) => {
     let vote = MsgVote.fromData(req.body)
     vote.voter = await getWalletAddress(userId);
 
+    if (!vote.voter) {
+        return res.status(404).send({result: 'Not found'})
+    }
+
     let result = await broadcastVote(vote)
 
     res.send({result: result})
