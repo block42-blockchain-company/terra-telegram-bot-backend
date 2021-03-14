@@ -6,8 +6,7 @@ import {AddressIncorrectForm, AuthNotDelegated} from "../const/errors";
 import "express-async-errors";
 
 
-export function onlyLoggedInFromTelegram(req: express.Request, res: express.Response, next) {
-    log.info("Checking Telegram authentication")
+export function onlyTelegramSeamlesslyLogged(req: express.Request, res: express.Response, next) {
     if (telegramAuthorized(req.query)) {
         next();
     } else {
@@ -15,6 +14,13 @@ export function onlyLoggedInFromTelegram(req: express.Request, res: express.Resp
     }
 }
 
+export function onlyFromBot(req: express.Request, res: express.Response, next) {
+    if (botAuthorized(req)) {
+        next();
+    } else {
+        res.status(401).json({error: 'Unauthorized!'})
+    }
+}
 
 function telegramAuthorized(query) {
     // In 'localterra' we skip authorization for easier testing
@@ -39,6 +45,17 @@ function telegramAuthorized(query) {
         .digest('hex');
 
     return hmac === hash;
+}
+
+function botAuthorized(req): boolean {
+    let headers = req.headers;
+
+    if (headers.hasOwnProperty('token')) {
+        return headers.token == config.telegramBotToken;
+    } else {
+        return false;
+    }
+
 }
 
 export function errorHandler(err, req, res, next) {
