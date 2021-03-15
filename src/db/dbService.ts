@@ -15,8 +15,8 @@ mongoose.connect(config.mongoDbUri, {
     if (err) {
         throw err;
     }
-    log.info("MongoDB connected successfully!");
 
+    log.info("MongoDB connected successfully!");
 });
 
 
@@ -26,13 +26,6 @@ export async function addDelegation(walletAddress: string, userId: string) {
     }, {upsert: true, new: true, setDefaultsOnInsert: true});
 
     return await query.exec();
-}
-
-
-export async function hasUserDelegated(userId: string) {
-    let result = await VoteDelegation.findOne({telegramId: userId}).exec();
-
-    return result != null;
 }
 
 

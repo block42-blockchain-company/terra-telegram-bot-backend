@@ -39,7 +39,7 @@ export async function handleDelegationConfirm(req: express.Request) {
     const address = req.params['address']
     const telegramUserId = req.query['id'].toString()
 
-    const hasDelegated = await hasGrantedPermission(address);
+    const hasDelegated = await hasDelegatedVoting(address);
 
     if (hasDelegated) {
         return await addDelegation(address, telegramUserId);
@@ -49,9 +49,9 @@ export async function handleDelegationConfirm(req: express.Request) {
 
 }
 
-async function hasGrantedPermission(address: string): Promise<boolean> {
+async function hasDelegatedVoting(address: string): Promise<boolean> {
     let url = config.lcdUrl + `msgauth/granters/${address}/grantees/${wallet.key.accAddress}/grants`
-    //todo: add /vote in the end and change handling!
+
     let response;
     try {
         response = await axios.get(url);

@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="app.ts" type="NodeJSConfigurationType" nameIsGenerated="true" node-parameters="--require ts-node/register  -r dotenv/config" path-to-js-file="src/app.ts" working-dir="$PROJECT_DIR$">
+    <EXTENSION ID="com.jetbrains.nodejs.run.NodeJSStartBrowserRunConfigurationExtension">
+      <browser url="http://localhost:3000" />
+    </EXTENSION>
+    <method v="2" />
+  </configuration>
+</component>

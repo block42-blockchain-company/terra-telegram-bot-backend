@@ -6,7 +6,7 @@ import {AddressIncorrectForm, AuthNotDelegated} from "../const/errors";
 import "express-async-errors";
 
 
-export function onlyTelegramSeamlesslyLogged(req: express.Request, res: express.Response, next) {
+export function onlyLoggedInViaTelegram(req: express.Request, res: express.Response, next) {
     if (telegramAuthorized(req.query)) {
         next();
     } else {
