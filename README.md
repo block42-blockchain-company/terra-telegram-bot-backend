@@ -1,13 +1,32 @@
-TO use this API:
+# Terra Telegram Bot Backend
 
-You can only call methods from this API from telegram,
-you must always append all authorization http args
-1. Ask this backend for generating MsgGrantAuthorization using GET /generate/:address
-2. Broadcast received message to the Terra chain using, for example, Terra Station.
-3. confirm broadcasting message on path /confirm/:address.
-4. You are ready to vote, to check if your address is able to vote with this backend
-use method /has-delegated/:userId
-4. 
+This backend is an additional module for [Terra Telegram Bot](https://github.com/block42-blockchain-company/thornode-telegram-bot) and operates with [terra-telegram-bot-website](https://github.com/block42-blockchain-company/terra-telegram-bot-website).
+
+## Running this project
+First you need to add a necessary configuration, to do it just fill out all empty variables in `.env` file. 
+
+Before starting install dependencies with
+```
+npm install
+```
+
+Intellij configuration is available out of the box, to start just run or debug `app.ts` configuration.
 
 
-{ "RESULT": {}}
+
+## Users authorization
+Most of the methods in this API can be called only by users logged in via [Telegram Seamless Login](https://core.telegram.org/api/url-authorization). You need to pass all HTTP arguments added by Telegram to use protected methods. 
+
+## Api documentation
+No API docs are available at the moment as this project is in early beta, for available routes just see code under `/router` directory.
+
+## Deployment
+
+For deployment [pm2](https://pm2.keymetrics.io/docs/usage/quick-start/) is used. To deploy testnet instance run
+```
+pm2 deploy testnet-pm2.json testnet
+```
+Hint: If you have uncommitted changes and pm2 blocks your deployment use `--force` flag.    
+
+To check how to display logs, status and other useful data see [quick start guide](https://pm2.keymetrics.io/docs/usage/quick-start/).
+
