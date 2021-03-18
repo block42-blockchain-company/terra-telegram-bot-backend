@@ -25,6 +25,7 @@ config.authorizationPeriod = new Int(86400 * 365 * 100 * 1000000000) // 100 year
 
 // env variables
 config.port = process.env.port ?? 3000
+config.seamlessLoginToken = process.env.seamless_login_bot_token;
 config.telegramBotToken = process.env.bot_token;
 config.mongoDbUri = process.env.mongo_uri;
 config.mnemonic = process.env.mnemonic;

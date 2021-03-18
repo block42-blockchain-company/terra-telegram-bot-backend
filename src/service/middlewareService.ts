@@ -22,6 +22,10 @@ export function onlyFromBot(req: express.Request, res: express.Response, next) {
     }
 }
 
+/**
+ * Implementation of Telegram Seamless login check
+ * See https://core.telegram.org/widgets/login#receiving-authorization-data
+ * */
 function telegramAuthorized(query) {
     // In 'localterra' we skip authorization for easier testing
     if (config.network == "localterra") {
@@ -32,7 +36,7 @@ function telegramAuthorized(query) {
     delete query['hash']
 
     const secretKey = crypto.createHash('sha256')
-        .update(config.telegramBotToken)
+        .update(config.seamlessLoginToken)
         .digest();
 
     const dataCheckString = Object.keys(query)
