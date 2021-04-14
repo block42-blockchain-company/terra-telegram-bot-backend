@@ -3,7 +3,7 @@
     {
       "name": "testnet-terra-telegram-bot-backend",
       "script": "npm",
-      "args": "run testnet:prod"
+      "args": "run start"
     }
   ],
   "deploy": {
@@ -13,8 +13,9 @@
         "134.209.246.103"
       ],
       "ref": "origin/master",
+      "post-setup": "echo post setup && ls -la",
       "repo": "https://github.com/block42-blockchain-company/terra-telegram-bot-backend",
-      "path": "/var/node/terra-telegram-bot-backend",
+      "path": "/var/node/testnet-terra-telegram-bot-backend",
       "post-deploy": "npm install && pm2 startOrRestart testnet-pm2.json"
     }
   }

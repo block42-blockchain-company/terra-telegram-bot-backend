@@ -1,0 +1,21 @@
+{
+  "apps": [
+    {
+      "name": "mainnet-terra-telegram-bot-backend",
+      "script": "npm",
+      "args": "run start"
+    }
+  ],
+  "deploy": {
+    "production": {
+      "user": "root",
+      "host": [
+        "134.209.246.103"
+      ],
+      "ref": "origin/master",
+      "repo": "https://github.com/block42-blockchain-company/terra-telegram-bot-backend",
+      "path": "/var/node/production-terra-telegram-bot-backend",
+      "post-deploy": "npm install && pm2 startOrRestart testnet-pm2.json"
+    }
+  }
+}
