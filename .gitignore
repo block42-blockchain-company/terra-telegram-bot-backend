@@ -117,3 +117,4 @@ dist
 
 # CONFIG - these files must remain ignored so PM2 doesn't reset it's state on deployment
 config/mnemonic_testnet.txt
+/.env
