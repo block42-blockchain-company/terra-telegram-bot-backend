@@ -44,11 +44,11 @@ export async function handleDelegationConfirm(req: express.Request) {
 
     // If user just submitted the transaction, make sure that it has time to be pushed to the chain
     if (hasDelegated == false) {
-        const maxChecks = 3;
+        const maxChecks = 10;
         let counter = 0;
         const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
         do {
-            await delay(3000);
+            await delay(2000);
             hasDelegated = await hasDelegatedVoting(address);
             counter++;
         } while (counter < maxChecks && hasDelegated == false);
