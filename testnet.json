@@ -16,7 +16,7 @@
       "post-setup": "echo post setup && ls -la",
       "repo": "https://github.com/block42-blockchain-company/terra-telegram-bot-backend",
       "path": "/var/node/testnet-terra-telegram-bot-backend",
-      "post-deploy": "npm install && pm2 startOrRestart testnet-pm2.json"
+      "post-deploy": "npm install && pm2 startOrRestart testnet.json"
     }
   }
 }
