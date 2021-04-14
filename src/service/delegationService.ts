@@ -38,15 +38,27 @@ export function generateMsgGrantAuthorization(address: string): MsgGrantAuthoriz
 export async function handleDelegationConfirm(req: express.Request) {
     const address = req.params['address']
     const telegramUserId = req.query['id'].toString()
+    let hasDelegated: boolean;
 
-    const hasDelegated = await hasDelegatedVoting(address);
+    hasDelegated = await hasDelegatedVoting(address);
+
+    // If user just submitted the transaction, make sure that it has time to be pushed to the chain
+    if (hasDelegated == false) {
+        const maxChecks = 3;
+        let counter = 0;
+        const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+        do {
+            await delay(3000);
+            hasDelegated = await hasDelegatedVoting(address);
+            counter++;
+        } while (counter < maxChecks && hasDelegated == false);
+    }
 
     if (hasDelegated) {
         return await addDelegation(address, telegramUserId);
     } else {
         throw new AuthNotDelegated();
     }
-
 }
 
 async function hasDelegatedVoting(address: string): Promise<boolean> {
