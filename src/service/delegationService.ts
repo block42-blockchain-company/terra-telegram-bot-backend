@@ -18,7 +18,8 @@ import "express-async-errors";
 
 const client = new LCDClient({
     URL: config.lcdUrl,
-    chainID: config.chainID
+    chainID: config.chainID,
+    gasPrices: "0.15uusd",
 });
 
 
